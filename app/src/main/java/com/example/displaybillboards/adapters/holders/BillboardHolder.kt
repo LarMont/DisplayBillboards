@@ -7,7 +7,7 @@ import com.example.displaybillboards.utilities.bindable.BindableViewHolder
 
 class BillboardHolder(parent: ViewGroup) :
     BindableViewHolder<BillboardItemBinding>(R.layout.billboard_item, parent) {
-    fun setModel() {
-
+    fun setImagePath(imagePath: String) {
+        binding?.imagePath = imagePath
     }
 }

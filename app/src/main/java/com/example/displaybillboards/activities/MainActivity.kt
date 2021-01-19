@@ -1,8 +1,7 @@
 package com.example.displaybillboards.activities
 
 import android.os.Bundle
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import androidx.lifecycle.Observer
 import com.example.displaybillboards.R
 import com.example.displaybillboards.databinding.ActivityMainBinding
 import com.example.displaybillboards.utilities.BaseActivity
@@ -17,12 +16,9 @@ class MainActivity :
         super.onCreate(savedInstanceState)
         viewModel = getViewModelFromProvider()
         viewModel.fetchBillboards()
-        viewModel.clickListener = {
-            Glide.with(this)
-                .load(it)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(binding.image)
-        }
+        viewModel.billboardsLiveData.observe(this,  Observer {
+            viewModel.updateBillboards()
+        })
         binding.model = viewModel
     }
 
