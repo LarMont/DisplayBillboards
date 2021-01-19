@@ -2,30 +2,34 @@ package com.example.displaybillboards.utilities.serverapi
 
 import android.util.Log
 import com.example.displaybillboards.constants.ERROR_LOG_TAG
-import io.reactivex.subjects.PublishSubject
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import java.net.HttpURLConnection
+import java.io.IOException
 
-open class RetrofitCallback<T>(private val subject: PublishSubject<T>) : Callback<T> {
-    override fun onFailure(call: Call<T>?, t: Throwable?) {
-        t?.let {
-            subject.onError(t)
+sealed class Result<out T: Any> {
+    data class Success<out T : Any>(val data: T) : Result<T>()
+    data class Error(val exception: Exception) : Result<Nothing>()
+}
+
+open class RetrofitCallback{
+    suspend fun <T : Any> safeApiCall(call: suspend () -> Response<T>, errorMessage: String): T? {
+
+        val result : Result<T> = safeApiResult(call, errorMessage)
+        var data : T? = null
+
+        when(result) {
+            is Result.Success ->
+                data = result.data
+            is Result.Error -> {
+                Log.e(ERROR_LOG_TAG, "$errorMessage & Exception - ${result.exception}")
+            }
         }
+        return data
     }
 
-    override fun onResponse(call: Call<T>?, response: Response<T>?) {
-        val responseBody = response?.body()
-        when {
-            response?.code() != HttpURLConnection.HTTP_OK -> Log.e(ERROR_LOG_TAG,"Callback error: ${response?.code() ?: 0}" )
-            responseBody == null -> Log.e(ERROR_LOG_TAG,"Callback null error" )
-            else -> onResult(responseBody)
-        }
-    }
+    private suspend fun <T: Any> safeApiResult(call: suspend ()-> Response<T>, errorMessage: String) : Result<T>{
+        val response = call.invoke()
+        if(response.isSuccessful) return Result.Success(response.body()!!)
 
-    open fun onResult(value: T) {
-        subject.onNext(value)
-        subject.onComplete()
+        return Result.Error(IOException("ERROR - $errorMessage"))
     }
 }

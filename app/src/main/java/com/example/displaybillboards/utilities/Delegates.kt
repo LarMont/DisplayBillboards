@@ -17,5 +17,4 @@ class ActivityBinding<in TClass : AppCompatActivity, out TBinding : ViewDataBind
             value = this
         }
     }
-
 }

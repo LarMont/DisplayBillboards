@@ -1,27 +1,43 @@
 package com.example.displaybillboards.viewmodels
 
-import android.graphics.BitmapFactory
-import android.view.View
-import android.widget.ImageButton
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.displaybillboards.utilities.getPosterHandler
+import com.example.displaybillboards.models.Billboard
 import com.example.displaybillboards.utilities.getTaskManager
-import com.example.displaybillboards.utilities.serverapi.BASE_URL
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class MainActivityViewModel : ViewModel() {
-    var index = 0
+    private val parentJob = Job()
 
-    fun onClick(view: View) {
-        getTaskManager().getBillboardsList({ billboards ->
-            val imageName = billboards[0].poster.replace(BASE_URL, "")
+    private val coroutineContext: CoroutineContext
+        get() = parentJob + Dispatchers.Default
 
-            getPosterHandler().getImageFile(imageName) {
-                val image =
-                    BitmapFactory.decodeFile(it.absolutePath, BitmapFactory.Options().apply {
-                        inJustDecodeBounds = false
-                    })
-                (view as ImageButton).setImageBitmap(image)
+    private val scope = CoroutineScope(coroutineContext)
+
+    private val billboardsLiveData = MutableLiveData<ArrayList<Billboard>>()
+
+    private var index = 0
+
+    var clickListener: ((String) -> Unit)? = null
+
+    fun onClick() {
+        billboardsLiveData.value?.let {value ->
+            clickListener?.invoke(value[index].poster)
+            if (index < value.count() - 1) {
+                index++
+            } else {
+                index = 0
             }
-        })
+        }
     }
+
+    fun fetchBillboards(){
+        scope.launch {
+            val billboards = getTaskManager().getBillboardsList()
+            billboardsLiveData.postValue(billboards)
+        }
+    }
+
+    fun cancelAllRequests() = coroutineContext.cancel()
 }
