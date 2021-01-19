@@ -38,4 +38,9 @@ class BaseApplication : Application(){  ////По завершению удали
         }
 //        fun isNeededPermissionsGranted() = context.isNeededPermissionsGranted()
     }
+
+    override fun onCreate() {
+        super.onCreate()
+        context = applicationContext
+    }
 }
