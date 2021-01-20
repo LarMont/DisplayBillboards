@@ -1,7 +1,7 @@
 package com.example.displaybillboards.models
 
 class Billboard {
-    var id = ""
+    var id = 0
     var poster = ""
     var year = ""
 }

@@ -28,7 +28,9 @@ class MainActivityViewModel : ViewModel() { ////Сделать общую мод
 
     val adapter = BillboardAdapter()
     lateinit var layoutManager: GridLayoutManager
+    var toggleChecked = false
     val toggleListener: (Boolean) -> Unit = {
+        toggleChecked = it
         adapter.setFilter(it)
     }
 

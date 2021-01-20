@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:textOff="off"
                 android:textOn="on"
+                android:checked="@{model.toggleChecked}"
                 android:toggleListener="@{model.toggleListener}"/>
 
         </LinearLayout>
