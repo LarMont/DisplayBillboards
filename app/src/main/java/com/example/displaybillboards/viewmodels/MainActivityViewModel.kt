@@ -9,7 +9,7 @@ import com.example.displaybillboards.utilities.getTaskManager
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel : ViewModel() { ////Сделать общую модель
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
@@ -28,10 +28,13 @@ class MainActivityViewModel : ViewModel() {
 
     val adapter = BillboardAdapter()
     lateinit var layoutManager: GridLayoutManager
+    val toggleListener: (Boolean) -> Unit = {
+        adapter.setFilter(it)
+    }
 
     fun updateBillboards() {
         billboardsLiveData.value?.let {
-            adapter.items = it
+            adapter.setItems(it)
         }
     }
 

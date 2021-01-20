@@ -18,18 +18,33 @@
         <LinearLayout
             android:id="@+id/filter"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@color/black"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Показать только за 2020 год"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="off"
+                android:textOn="on"
+                android:toggleListener="@{model.toggleListener}"/>
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:adapter="@{model.adapter}"
             android:layoutManager="@{model.layoutManager}" />
 
