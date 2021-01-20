@@ -2,6 +2,7 @@ package com.example.displaybillboards.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.displaybillboards.adapters.BillboardAdapter
 import com.example.displaybillboards.models.Billboard
 import com.example.displaybillboards.utilities.getTaskManager
@@ -26,6 +27,7 @@ class MainActivityViewModel : ViewModel() {
     }
 
     val adapter = BillboardAdapter()
+    lateinit var layoutManager: GridLayoutManager
 
     fun updateBillboards() {
         billboardsLiveData.value?.let {

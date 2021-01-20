@@ -2,19 +2,22 @@
 <layout>
 
     <data>
+
         <variable
             name="imagePath"
             type="String" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imagePath="@{imagePath}"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:imagePath="@{imagePath}"
+            android:padding="3dp" />
 
     </androidx.cardview.widget.CardView>
 </layout>
