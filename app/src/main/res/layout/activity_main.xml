@@ -22,6 +22,14 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh_icon"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                android:padding="5dp"/>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,8 +43,9 @@
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="off"
-                android:textOn="on"
+                android:textOff=""
+                android:textOn=""
+                android:background="@drawable/toggle_background"
                 android:checked="@{model.toggleChecked}"
                 android:toggleListener="@{model.toggleListener}"/>
 

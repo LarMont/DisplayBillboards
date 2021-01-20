@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.displaybillboards.R
 
 @BindingAdapter("android:adapter")
 fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>?) {
@@ -34,6 +35,7 @@ fun setImagePath(imageView: ImageView, imagePath: String) {
         Glide.with(imageView)
             .load(imagePath)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .error(R.drawable.image_not_found)
             .into(imageView)
     }
 }
