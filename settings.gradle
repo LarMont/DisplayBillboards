@@ -1,3 +1,4 @@
+include ':adapter'
 include ':baseview'
 include ':core'
 include ':app'

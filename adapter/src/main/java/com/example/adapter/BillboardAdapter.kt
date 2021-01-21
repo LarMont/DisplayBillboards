@@ -1,8 +1,7 @@
-package com.example.core.adapters
+package com.example.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.adapters.holders.BillboardHolder
 import com.example.core.models.Billboard
 
 class BillboardAdapter : RecyclerView.Adapter<BillboardHolder>() {

@@ -3,8 +3,8 @@ package com.example.displaybillboards.viewmodels
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.adapter.BillboardAdapter
 import com.example.baseview.BaseViewModel
-import com.example.core.adapters.BillboardAdapter
 import com.example.core.getDBWorker
 import com.example.core.getTaskManager
 import com.example.core.models.Billboard
