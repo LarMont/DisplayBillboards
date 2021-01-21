@@ -1,5 +1,5 @@
 include ':adapter'
 include ':baseview'
 include ':core'
-include ':example'
+include ':sample'
 rootProject.name = "DisplayBillboards"
