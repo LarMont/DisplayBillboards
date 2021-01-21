@@ -28,7 +28,8 @@
                 android:src="@drawable/refresh_icon"
                 android:background="@color/white"
                 android:layout_gravity="center"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                android:onClick="@{() -> model.updateBillboards()}"/> <!-- Заменить на повторный запрос к серверу, но убрать дубли -->
 
             <TextView
                 android:layout_width="0dp"

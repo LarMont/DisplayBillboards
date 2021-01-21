@@ -3,6 +3,8 @@ package com.example.displaybillboards.utilities
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.displaybillboards.constants.RETROFIT_LOG_TAG
+import com.example.displaybillboards.utilities.database.DBWorker
+import com.example.displaybillboards.utilities.database.DBWorkerImpl
 import com.example.displaybillboards.utilities.serverapi.*
 import com.example.displaybillboards.viewmodels.MainActivityViewModel
 import com.github.salomonbrys.kodein.*
@@ -20,6 +22,7 @@ class KodeinWorker {
             addConfig {
                 bind<ServerApi>() with singleton { createRetrofit().create(ServerApi::class.java) }
                 bind<TaskManager>() with singleton { TaskManagerImpl() }
+                bind<DBWorker>() with singleton { DBWorkerImpl() }
                 bindViewModels()
             }
         }
@@ -39,6 +42,7 @@ private inline fun <reified T : Any> kodeinResolve() = KodeinWorker.kodein.insta
 
 fun getServerApi(): ServerApi = kodeinResolve()
 fun getTaskManager(): TaskManager = kodeinResolve()
+fun getDBWorker(): DBWorker = kodeinResolve()
 
 private fun createRetrofit() = Retrofit.Builder()   ////разнести по нужным местам
     .baseUrl(BASE_URL)
