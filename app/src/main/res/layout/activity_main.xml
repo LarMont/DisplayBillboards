@@ -25,19 +25,19 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/refresh_icon"
-                android:background="@color/white"
                 android:layout_gravity="center"
+                android:background="@color/white"
+                android:onClick="@{() -> model.fetchLiveData()}"
                 android:padding="5dp"
-                android:onClick="@{() -> model.fetchBillboards()}"/>
+                android:src="@drawable/refresh_icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="10dp"
-                android:layout_gravity="center"
                 android:text="Показать только за 2020 год"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -45,12 +45,12 @@
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff=""
-                android:textOn=""
                 android:layout_gravity="center"
                 android:background="@drawable/toggle_background"
                 android:checked="@={model.toggleChecked}"
-                android:toggleListener="@{model.toggleListener}"/>
+                android:textOff=""
+                android:textOn=""
+                android:toggleListener="@{model.toggleListener}" />
 
         </LinearLayout>
 
@@ -58,10 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="12sp"
-            android:textColor="@color/red"
             android:text="@{model.statusLocalDataText}"
-            android:visible="@{model.isLocalData}"/>
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:visible="@{model.isLocalData}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

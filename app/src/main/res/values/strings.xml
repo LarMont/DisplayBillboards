@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">DisplayBillboards</string>
-    <string name="message_developing">Функционал находится в разработке</string>
     <string name="button_cancel">Отмена</string>
     <string name="load_local_data">Данные загружены с устройсва</string>
     <string name="empty_local_data">Постеры ранее не загружались</string>
