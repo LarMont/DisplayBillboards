@@ -1,5 +1,6 @@
 package com.example.displaybillboards.utilities
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.ToggleButton
 import androidx.databinding.BindingAdapter
@@ -10,14 +11,14 @@ import com.example.displaybillboards.R
 
 @BindingAdapter("android:adapter")
 fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>?) {
-    if(adapter != null) {
+    if (adapter != null) {
         recyclerView.adapter = adapter
     }
 }
 
 @BindingAdapter("android:layoutManager")
 fun setLayoutManager(recyclerView: RecyclerView, manager: RecyclerView.LayoutManager?) {
-    if(manager != null) {
+    if (manager != null) {
         recyclerView.layoutManager = manager
     }
 }
@@ -37,5 +38,14 @@ fun setImagePath(imageView: ImageView, imagePath: String) {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .error(R.drawable.image_not_found)
             .into(imageView)
+    }
+}
+
+@BindingAdapter("android:visible")
+fun setVisible(view: View, visible: Boolean) {
+    view.visibility = if (visible) {
+        View.VISIBLE
+    } else {
+        View.GONE
     }
 }

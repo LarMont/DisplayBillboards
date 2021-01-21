@@ -29,7 +29,7 @@
                 android:background="@color/white"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                android:onClick="@{() -> model.updateBillboards()}"/> <!-- Заменить на повторный запрос к серверу, но убрать дубли -->
+                android:onClick="@{() -> model.fetchBillboards()}"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -37,6 +37,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="10dp"
+                android:layout_gravity="center"
                 android:text="Показать только за 2020 год"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -46,11 +47,21 @@
                 android:layout_height="wrap_content"
                 android:textOff=""
                 android:textOn=""
+                android:layout_gravity="center"
                 android:background="@drawable/toggle_background"
-                android:checked="@{model.toggleChecked}"
+                android:checked="@={model.toggleChecked}"
                 android:toggleListener="@{model.toggleListener}"/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/red"
+            android:text="@{model.statusLocalDataText}"
+            android:visible="@{model.isLocalData}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
