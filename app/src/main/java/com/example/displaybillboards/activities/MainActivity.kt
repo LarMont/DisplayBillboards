@@ -3,7 +3,7 @@ package com.example.displaybillboards.activities
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.billboardslibrary.utilities.BaseActivity
+import com.example.baseview.BaseActivity
 import com.example.displaybillboards.utilities.BaseApplication
 import com.example.displaybillboards.R
 import com.example.displaybillboards.databinding.ActivityMainBinding
