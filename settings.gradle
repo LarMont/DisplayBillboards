@@ -1,2 +1,3 @@
+include ':billboardslibrary'
 include ':app'
 rootProject.name = "DisplayBillboards"
