@@ -36,10 +36,16 @@ class MainActivityViewModel : BaseViewModel<ArrayList<Billboard>>() {
         }
     }
 
+    fun updateLayoutManager(layoutManager: GridLayoutManager) {
+        this.layoutManager = layoutManager
+    }
+
     override suspend fun loadDataAsync() {
         val billboards = getTaskManager().getBillboardsList()
         liveData.postValue(billboards)
-        getDBWorker(BaseApplication.getApplicationContext()).resaveBillboards(billboards ?: arrayListOf())
+        getDBWorker(BaseApplication.getApplicationContext()).resaveBillboards(
+            billboards ?: arrayListOf()
+        )
         isLocalData.set(false)
     }
 

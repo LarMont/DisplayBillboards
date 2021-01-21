@@ -1,12 +1,11 @@
 package com.example.baseview
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel<T> : ViewModel() {
+abstract class BaseViewModel<T> : ViewModel(), LifecycleObserver {
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
@@ -22,8 +21,18 @@ abstract class BaseViewModel<T> : ViewModel() {
         Log.e("base_view_error", throwable.message.toString())
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    open fun onCreate() {
+        fetchLiveData()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    open fun destroy() {
+        coroutineContext.cancel()
+    }
+
     fun fetchLiveData() {
-        scope.launch (getCoroutineExceptionHandler()) {
+        scope.launch(getCoroutineExceptionHandler()) {
             loadDataAsync()
         }
     }

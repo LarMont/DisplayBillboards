@@ -1,5 +1,6 @@
 package com.example.baseview
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -13,10 +14,14 @@ abstract class BaseActivity<TModel : BaseViewModel<*>, TBinding : ViewDataBindin
         layoutResId
     )
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.unbind()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        createViewModel()
+        binding.lifecycleOwner = this
+        lifecycle.addObserver(viewModel)
     }
+
+    abstract fun createViewModel()
 
     protected inline fun <reified T : ViewModel> getViewModelFromProvider(): T =
         ViewModelProvider(this).get(T::class.java)
